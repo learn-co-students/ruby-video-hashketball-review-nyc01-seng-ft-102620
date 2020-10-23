@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require './hashketball.rb'
+require 'pry'
 
 def game_hash
   {
@@ -127,4 +129,82 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(players_name)
+  game_hash.each do |team_place, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == players_name
+        return player[:points]
+      end
+    end
+  end
+end
+
+def shoe_size(players_name)
+  game_hash.each do |team_place, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == players_name
+        return player[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |team_place, team_info|
+    if team_info[:team_name] == team_name
+      return team_info[:colors]
+    end
+  end
+end
+
+def team_names
+  team_names = []
+  game_hash.each do |team_place, team_info|
+    team_names << team_info[:team_name]
+      end
+  return team_names
+end
+
+def player_numbers(team_name)
+  team_numbers = []
+  game_hash.each do |team_place, team_info|
+    if team_info[:team_name] == team_name
+      team_info[:players].each do |player|
+        team_numbers << player[:number]
+        end
+      end
+    end
+  return team_numbers
+end
+
+def player_stats(players_name)
+  game_hash.each do |team_place, team_info|
+    team_info[:players].each do |player|
+      if player[:player_name] == players_name
+        return player
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  big_shoe = 2
+  big_shoe_rebounds_total = 3
+  game_hash.each do |team_place, team_info|
+    team_info[:players].each do |player|
+      if player[:shoe] >= big_shoe
+        big_shoe = player[:shoe]
+      end
+
+    game_hash.each do |team_place, team_info|
+      team_info[:players].each do |player|
+        #if player[:rebounds] >= big_shoe_rebounds && player[:shoe] >= big_shoe
+        if player[:shoe] == big_shoe
+          big_shoe_rebounds_total = player[:rebounds]
+        end
+          end
+        end
+      end
+    end
+  return big_shoe_rebounds_total
+end
